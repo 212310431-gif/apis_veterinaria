@@ -6,18 +6,13 @@ require('./src/config/mysql');
 
 const PORT = process.env.PORT || 3000;
 
-const iniciarServidor = async () => {
+app.listen(PORT, async () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
+
     try {
         await conectarMongo();
-
-        app.listen(PORT, () => {
-            console.log(`Servidor corriendo en el puerto ${PORT}`);
-        });
-
+        console.log('MongoDB conectado correctamente');
     } catch (error) {
-        console.error('Error al iniciar servidor');
-        console.error(error);
+        console.error('Error al conectar con MongoDB:', error.message);
     }
-};
-
-iniciarServidor();
+});
